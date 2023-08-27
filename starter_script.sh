@@ -1,12 +1,17 @@
 #!/bin/bash
 #GPU
 nvidia-smi -mig 1
+
+#Reboot and try the below command
 nvidia-smi mig -cgi 0 -C
+
 #Python Virtual Env
-sudo apt install python3.8-venv
+sudo apt install python3-venv
 sudo apt install git-lfs
 python3 -m venv llmenv
+
 #Python Package Install
+source llmenv/bin/activate
 llmenv/bin/pip install jupyter
 llmenv/bin/pip install scipy
 llmenv/bin/pip install scikit-learn
