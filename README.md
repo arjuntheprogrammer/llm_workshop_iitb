@@ -1,53 +1,75 @@
-# LLM_Workshop
+# LLM Workshop IITB
+
+### IITBAA Bengaluru Chapter - "Hands-On Workshop on Open Source LLM Deployment and Fine-Tuning
+
+1. LLM UseCase - Wikipedia Corpus
+   a. Open Source Model Deployment
+   b. Supervised FineTuning
+   c. Quantisation - Cost vs. Quality
+   d. Retrieval Augmented Generation
+   e. Evaluation
+
+2. Image Diffusion UseCase - Personalized Image Generation
+   a. Composition Based FineTuning
+   - Control Net / Drag GAN
+     b. Style Based FineTuning
+   - DreamBooth / Textual Inversion and LoRa
+     c. Prompt Engineering - How Negative Prompting Works
+
+<https://www.iitbombay.org/e/iitbaa-bengaluru-chapter-gen-ai-workshop/>
+
+---
+
 Setting up the GPU Node
 
 All these commands should be run when the node is created. The starter_scripts.sh should be used at creation of node.
 
-
 Config: A100 40 GB RAM / Ubuntu
 
-#GPU Setup  
-nvidia-smi -mig 1  
-nvidia-smi mig -cgi 0 -C  
+#GPU Setup
+nvidia-smi -mig 1
+nvidia-smi mig -cgi 0 -C
 
+#Setting up the Virtual Environment
+sudo apt install python3.8-venv
+sudo apt install git-lfs
+python3 -m venv llmenv
 
-#Setting up the Virtual Environment  
-sudo apt install python3.8-venv  
-sudo apt install git-lfs  
-python3 -m venv llmenv  
-
-
-#Installing Packages  
-source llmenv/bin/activate  
-pip install jupyter  
-pip install notebook  
-pip install torch==2.0.0+cu118 torchvision==0.15.1+cu118 torchaudio==2.0.1 --index-url https://download.pytorch.org/whl/cu118  
-pip install git+https://github.com/huggingface/transformers  
-pip install -q accelerate==0.21.0 peft==0.4.0 bitsandbytes==0.40.2 trl==0.4.7  
-pip install -q -U datasets  
-pip install -q -U einops  
-pip install -q -U wandb  
+#Installing Packages
+source llmenv/bin/activate
+pip install jupyter
+pip install notebook
+pip install torch==2.0.0+cu118 torchvision==0.15.1+cu118 torchaudio==2.0.1 --index-url https://download.pytorch.org/whl/cu118
+pip install git+https://github.com/huggingface/transformers
+pip install -q accelerate==0.21.0 peft==0.4.0 bitsandbytes==0.40.2 trl==0.4.7
+pip install -q -U datasets
+pip install -q -U einops
+pip install -q -U wandb
 pip install -q -U evaluate
 
-#Other configuration  
+### Other configuration
+
 1. Create an account on huggingface (https://huggingface.co/)
 2. Request access to the LLAMA 2 CHAT 7B Model (https://huggingface.co/meta-llama/Llama-2-7b-chat-hf ). This is the Base model we will tune for our various tasks. Please note that the review for this takes some time so please request access to this as soon as possible. 1 per group should be fine.
 3. Optional: Create an account on Weights and Biases (https://wandb.ai/ )
 
-#Clone the repo
-git clone https://github.com/DeepakGitH/LLM_Workshop.git  
-**PLEASE NOTE**  
-**If the starter script does not work. Please run the script to prepare the node**  
-1. chmod 700 LLM_Workshop/starter_script.sh
-2. ./LLM_Workshop/starter_script.sh
+### Clone the repo
+
+git clone https://github.com/arjuntheprogrammer/llm_workshop_iitb.git
+**PLEASE NOTE**
+**If the starter script does not work. Please run the script to prepare the node**
+
+1. chmod 700 llm_workshop_iitb/starter_script.sh
+2. ./llm_workshop_iitb/starter_script.sh
 
 Running Jupyter Notebook - Do this before the start of the workshop
+
 1. Login to the Node using SSH.
    You will receive login credentials over email you have used for E2E
 2. Activate the virtual env
-    source llmenv/bin/activate
+   source llmenv/bin/activate
 3. Run the jupyter server on the node
-jupyter notebook --no-browser --port=9999 --allow-root  
-Run a ssh tunnel on your local machine
-ssh -L 8080:localhost:9999 root@<REMOTE_HOST>
-You can access the jupyter interface at http:://localhost:8080
+   jupyter notebook --no-browser --port=9999 --allow-root
+   Run a ssh tunnel on your local machine
+   ssh -L 8080:localhost:9999 root@<REMOTE_HOST>
+   You can access the jupyter interface at http:://localhost:8080
